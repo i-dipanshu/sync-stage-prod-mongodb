@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongo-restore-cronjob
+  namespace: <namespace>
+spec:
+  schedule: "30 4 * * *"
+  timeZone: America/New_York
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          securityContext:
+            runAsUser: 0
+          containers:
+          - name: mongo-restore-client
+            image: mongo
+            securityContext:
+              allowPrivilegeEscalation: false
+            volumeMounts:
+            - name: mongo-restore-config
+              mountPath: /script
+            env:
+            - name: BUCKET_NAME
+              value: <bucket-name>
+            - name: MONGODB_HOST
+              value: <svc-name>
+            - name: MONGODB_USER
+              value: <db-user>
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: <passwd-secret-name>
+                  key: <key>
+            - name: SERVICE_ACCOUNT_JSON
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-service-account-json
+                  key: service-account.json
+            command:
+            - "/bin/bash"
+            - "/script/mongo-restore.sh"
+          volumes:
+          - name: mongo-restore-config
+            configMap:
+              name: mongo-restore-config
+          restartPolicy: Never
