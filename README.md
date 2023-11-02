@@ -17,11 +17,11 @@ This project involves the synchronization of MongoDB ReplicaSets between product
 
 ## Usage
 
-2. Create the K8s cronjob for automated synchronization.
+1. Create the K8s cronjob for automated synchronization.
 
-3. Create a Jenkins job for manual synchronization triggers.
+2. Create a Jenkins job for manual synchronization triggers.
 
-4. Customize the schedule and settings to fit your specific requirements.
+3. Customize the schedule and settings to fit your specific requirements.
 
 ## Configuration
 
