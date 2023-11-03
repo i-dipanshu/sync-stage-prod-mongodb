@@ -1,6 +1,6 @@
 ## Overview
 
-This project involves the synchronization of MongoDB ReplicaSets between production and staging environments deployed as Kubernetes (K8s) stateful sets. It also included a Jenkins Job for manual syncing of staging database.
+This project involves the synchronization of MongoDB ReplicaSets between production and staging environments deployed as Kubernetes (K8s) stateful sets. It also includes a Jenkins Job for manual syncing of staging database.
 
 ## Features
 
